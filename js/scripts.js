@@ -1,3 +1,5 @@
+//Exercise 1.2
+//Pokemon List 
 let pokemonList = [{
     name: 'Bulbasaur',
     height: '0.7',
