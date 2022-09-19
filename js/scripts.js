@@ -19,9 +19,9 @@ let pokemonList = [{
 for(let i = 0; i < pokemonList.length; i++) {
 //If pokemon is bigger than 0.6 'is huge' is printed in the DOM
 	if(pokemonList[i].height > 0.6) {
-		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)  ' + 'is huge!');
+		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)  ' + 'is huge!' + '<br>');
 	} else {
-		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)  ');
+		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)' + '<br>');
 	}
 }
 
