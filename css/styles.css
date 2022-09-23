@@ -1,12 +1,7 @@
 body{
-    background-image:url(https://assets.pokemon.com/assets//cms2/img/trading-card-game/_downloads/xy1/xy1-wallpaper-venusaur-1440x900.jpg);
+    background-color: red;
     font-size: 30px;
     color: white;
 }
 
-.pokemon__list{
-    background-color: red;
-    padding: 20px;
-    max-width: fit-content;
-    margin: auto;
-}
+
