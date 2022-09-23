@@ -11,19 +11,20 @@ let pokemonList = [{
 }, {
 	name: 'Squirtle',
 	height: '0.5',
-	type: ['water', 'Turtle']
+	type: ['water', 'turtle']
 }];
-//Exercise 1.3
-//Loop that iterates over each item in Pokemon List
+
+//Exercise 1.4
+//Refactor code to use the foreach() function rather than the for loop
 //Pokemon's name is written on website's DOM
-for(let i = 0; i < pokemonList.length; i++) {
+pokemonList.forEach(function(pokemon) {
 //If pokemon is bigger than 0.6 'is huge' is printed in the DOM
-	if(pokemonList[i].height > 0.6) {
-		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)  ' + 'is huge!' + '<br>');
+	if (pokemonList.height > 0.6) {
+		document.write(pokemon.name + '  ' + 'height:\(' + pokemon.height + '\)  ' + 'is huge!' + '<br>');
 	} else {
-		document.write(pokemonList[i].name + '  ' + 'height:\(' + pokemonList[i].height + '\)' + '<br>');
+		document.write(pokemon.name + '  ' + 'height:\(' + pokemon.height + '\)' + '<br>');
 	}
-}
+});
 
 
 
