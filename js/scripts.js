@@ -68,8 +68,10 @@ let pokemonObject = {
 	type: 'fire'
 };
 
+	// added Charzard to pokemon list
 pokemonRepository.add(pokemonObject);
 
+	// forEach() loop to iterate over pokemon list
 pokemonRepository.getAll().forEach(function(pokemon) {
 	pokemonRepository.addListItem(pokemon);
 });
