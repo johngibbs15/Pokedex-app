@@ -1,7 +1,40 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
-    background-color: red;
-    font-size: 30px;
-    color: white;
+    background-image: url(https://images.alphacoders.com/581/581224.jpg);
 }
 
 
+.button-class {
+    background-color: #dddddd;
+    width: 40%;
+    padding: 1em 0;
+    text-align: center;
+    list-style-type: none;
+    font-size: 1.5rem;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: black;
+    border: 3px solid #6e1515;
+    transition: all .2s ease-in-out; 
+    box-shadow: 0 0 25px rgb(142, 128, 128);
+  }
+
+.button-class:hover{
+    transform: scale(1.1); 
+}
+
+h1{
+  font-size: 3rem;
+  margin-left: 1rem;
+}
+header{
+    background-color: #dddddd;
+    position: sticky;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
