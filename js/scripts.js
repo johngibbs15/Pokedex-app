@@ -22,33 +22,54 @@ let pokemonRepository = (function() {
 	// checks if item is an object
 	// validates whether all Object.keys() of the parameter are equal to the specific keys expected
 	function add(pokemon) {
-		if (typeof pokemon === 'object' && Object.keys(pokemon) !== ['name', 'height', 'type']){
+		if (typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'type' in pokemon) {
 			pokemonList.push(pokemon);
 		}
 	}
 
+	function addListItem(pokemon) {
+
+		let pokemonList = document.querySelector('.pokemon-list');
+
+		// create list and button variables
+		let listItem = document.createElement('li');
+		let button = document.createElement('button');
+
+		// assign pokemon name to the button
+		button.innerText = pokemon.name
+		button.classList.add("button-class");
+
+		// append button to the <li> and the the <li> to the <ul>
+		listItem.appendChild(button);
+		pokemonList.appendChild(listItem);
+
+		// add an event listenter that listens to a click. call the showDetails function.
+		button.addEventListener('click', function(event) {
+			showDetails(pokemon)
+		})
+	}
+
+	function showDetails(pokemon) {
+		console.log(pokemon);
+
+	}
+
 	return {
 		getAll: getAll,
-		add: add
+		add: add,
+		addListItem: addListItem,
+		showDetails: showDetails
 	}
 })()
 
-// below is a test to check if function is working properly
-// function will only add item if "!==" is used. this is not the intended outcome. 
-// function should use "===" to validate object keys
-// the keys entered below seem equal to the parameters defined in the function
-pokemonRepository.add({name:'Charzard', height:'1.0', type:'fire'});
+let pokemonObject = {
+	name: 'Charzard',
+	height: '1.0',
+	type: 'fire'
+};
 
-// Refactor code to use the foreach() function rather than the for loop
-// Pokemon's name is written on website's DOM
+pokemonRepository.add(pokemonObject);
+
 pokemonRepository.getAll().forEach(function(pokemon) {
-	// If pokemon is bigger than 0.6 'is huge' is printed in the DOM
-	if (pokemon.height > 0.6) {
-		document.write(pokemon.name + '  ' + 'height:\(' + pokemon.height + '\)  ' + 'is huge!' + '<br>');
-	} else {
-		document.write(pokemon.name + '  ' + 'height:\(' + pokemon.height + '\)' + '<br>');
-	}
+	pokemonRepository.addListItem(pokemon);
 });
-
-
-
