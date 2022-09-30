@@ -34,7 +34,15 @@ h1{
 }
 header{
     background-color: #dddddd;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
+.spinner-img{
+    margin: 1rem 0 0 1rem;
+    display: none;
+    
+}
+
