@@ -1,39 +1,30 @@
 // Assign IIFE to pokemonRepository variable 
-let pokemonRepository = (function() {
+const pokemonRepository = (() => {
 	// Pokemon List 	
-	let pokemonList = [{
-		name: 'Bulbasaur',
-		height: '0.7',
-		type: ['grass', 'poison']
-	}, {
-		name: 'Charmander',
-		height: '0.6',
-		type: ['fire', 'dragon']
-	}, {
-		name: 'Squirtle',
-		height: '0.5',
-		type: ['water', 'turtle']
-	}];
+	const pokemonList = [];
+	const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+	const spinner = document.querySelector('#spinner');
+	// display a loading message while data is being loaded. 
+	const showSpinner = () =>{spinner.classList.remove('spinner-img');}
+	const hideSpinner =() => { spinner.classList.add('spinner-img');}
 
-	function getAll() {
-		return pokemonList;
-	}
+	const getAll = () => {return pokemonList;}
 
 	// checks if item is an object
 	// validates whether all Object.keys() of the parameter are equal to the specific keys expected
-	function add(pokemon) {
-		if (typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'type' in pokemon) {
+	const add = pokemon => {
+		if (typeof pokemon === 'object' && 'name' in pokemon && 'detailsUrl' in pokemon) {
 			pokemonList.push(pokemon);
 		}
 	}
 
-	function addListItem(pokemon) {
+	const addListItem = pokemon => {
 
-		let pokemonList = document.querySelector('.pokemon-list');
+		const listContainer = document.querySelector('.pokemon-list');
 
 		// create list and button variables
-		let listItem = document.createElement('li');
-		let button = document.createElement('button');
+		const listItem = document.createElement('li');
+		const button = document.createElement('button');
 
 		// assign pokemon name to the button
 		button.innerText = pokemon.name
@@ -41,37 +32,72 @@ let pokemonRepository = (function() {
 
 		// append button to the <li> and the the <li> to the <ul>
 		listItem.appendChild(button);
-		pokemonList.appendChild(listItem);
+		listContainer.appendChild(listItem);
 
 		// add an event listenter that listens to a click. call the showDetails function.
-		button.addEventListener('click', function(event) {
-			showDetails(pokemon)
+		button.addEventListener('click', (event) => showDetails(pokemon))		
+		
+	}
+
+	// fetch data from API, then add each pokemon to the pokemonList with add add function
+	const loadList = () => {
+		showSpinner();
+		return fetch(apiUrl).then(response => {
+			hideSpinner();
+			return response.json();
+		}).then(json => {
+			json.results.forEach(item => {
+				const pokemon = {
+					name: item.name,
+					detailsUrl: item.url
+				};
+				add(pokemon);
+				console.log(pokemon);
+			});
+		}).catch(e => {
+			hideSpinner();
+			console.error(e);
 		})
 	}
 
-	function showDetails(pokemon) {
-		console.log(pokemon);
+	// loads detailed data for a given pokemon
+	const loadDetails = (item) => {
+		showSpinner();
+		const url = item.detailsUrl;
+		return fetch(url).then(response =>{
+			hideSpinner();
+			return response.json();
+		}).then(details => {
+			item.imageUrl = details.sprites.front_default;
+			item.height = details.height;
+			item.types = details.types;
+		}).catch(e => {
+			hideSpinner();
+			console.error(e);
+		});
+	}
 
+	// executes load details function
+	const showDetails = (item) => {
+		loadDetails(item).then(() => {
+			console.log(item);
+		});
 	}
 
 	return {
 		getAll: getAll,
 		add: add,
 		addListItem: addListItem,
-		showDetails: showDetails
+		showDetails: showDetails,
+		loadList: loadList,
+		loadDetails: loadDetails
 	}
 })()
 
-let pokemonObject = {
-	name: 'Charzard',
-	height: '1.0',
-	type: 'fire'
-};
 
-	// added Charzard to pokemon list
-pokemonRepository.add(pokemonObject);
-
-	// forEach() loop to iterate over pokemon list
-pokemonRepository.getAll().forEach(function(pokemon) {
-	pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+	// data is loaded
+	pokemonRepository.getAll().forEach(function(pokemon) {
+		pokemonRepository.addListItem(pokemon);
+	});
 });
