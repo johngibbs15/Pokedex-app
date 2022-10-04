@@ -1,2 +1,2 @@
-# Podedex-app
+# Pokedex-app
  
