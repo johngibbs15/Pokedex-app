@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+a{
+  font-size: 36px;
+}
+
 body{
     background-image: url(https://images.alphacoders.com/581/581224.jpg);
 }
@@ -28,10 +32,8 @@ body{
     transform: scale(1.1); 
 }
 
-h1{
-  font-size: 3rem;
-  margin-left: 1rem;
-}
+
+
 header{
     background-color: #dddddd;
     position: sticky;
@@ -92,8 +94,23 @@ ul{
   text-align: center;
   border-radius: 20px;
   padding: 30px 30px 70px;
+} 
+
+
+
+@media all and (max-width: 500px){
+  .modal{
+    width: 50%;
+    height: 35%;
+    font-size: 1rem;
+  }
 }
 
-
-
-
+@media all and (min-width: 500px) and (max-width: 750px){
+  .modal{
+    width: 50%;
+    height: 35%;
+    font-size: 1rem;
+  }
+  
+}
