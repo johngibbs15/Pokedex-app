@@ -3,8 +3,8 @@ let pokemonRepository = (() => {
 	// Pokemon List 	
 	let pokemonList = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-	
-	
+
+
 	let getAll = () => {
 		return pokemonList;
 	}
@@ -27,13 +27,13 @@ let pokemonRepository = (() => {
 
 		// assign pokemon name to the button
 		button.innerText = pokemon.name
-		
+
 		// toggle modal
 		button.setAttribute('data-toggle', 'modal');
-    	button.setAttribute('data-target', '#exampleModal')
-    	button.classList.add('pokemon-button')
-    	listItem.appendChild(button);
-    	listContainer.appendChild(listItem);
+		button.setAttribute('data-target', '#exampleModal')
+		button.classList.add('pokemon-button')
+		listItem.appendChild(button);
+		listContainer.appendChild(listItem);
 
 		// add an event listenter that listens to a click. call the showDetails function.
 		button.addEventListener('click', (event) => showDetails(pokemon))
@@ -58,31 +58,31 @@ let pokemonRepository = (() => {
 		})
 	}
 
-	
+
 	// loads detailed data for a given pokemon
 	let loadDetails = item => {
 		let url = item.detailsUrl;
 		return fetch(url).then(response => {
 			return response.json();
 		}).then(details => {
-		item.imageUrl = details.sprites.front_default;
-    	item.height = details.height;
-    	item.weight = details.weight;
-		item.abilities = [];
-		for (let i=0; details.abilities.length; i++){
-			item.abilities.push(details.abilities[i].ability.name)
-		}
-		item.types = [];
-		for (let j=0; details.types.length;j++){
-			item.types.push(details.types[j].type.name)
-		}
+			item.imageUrl = details.sprites.front_default;
+			item.height = details.height;
+			item.weight = details.weight;
+			item.abilities = [];
+			for (let i = 0; details.abilities.length; i++) {
+				item.abilities.push(details.abilities[i].ability.name)
+			}
+			item.types = [];
+			for (let j = 0; details.types.length; j++) {
+				item.types.push(details.types[j].type.name)
+			}
 
 		}).catch(e => {
 			console.error(e);
 		});
 	}
 
-	
+
 	// executes load details function
 	let showDetails = pokemon => {
 		loadDetails(pokemon).then(() => {
@@ -90,11 +90,11 @@ let pokemonRepository = (() => {
 		});
 	}
 
-	
+
 	function showModal(pokemon) {
 		let modalBody = $('.modal-body');
 		let modalTitle = $('.modal-title');
-		
+
 		// clear modal
 		modalTitle.empty();
 		modalBody.empty();
@@ -117,8 +117,8 @@ let pokemonRepository = (() => {
 		modalBody.append(typesElement);
 
 	}
-	
-	
+
+
 	return {
 		getAll: getAll,
 		add: add,
