@@ -15,4 +15,4 @@ An application that displays a list of pokemon. Users can click on a given pokem
 
 ## Demo
 
-https://github.com/johngibbs15/Pokedex-app/blob/main/js/scripts.js
+https://johngibbs15.github.io/Pokedex-app/
