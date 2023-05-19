@@ -1,0 +1,11 @@
+
+.eslintignore
+.prettierignore
+.vscode/.prettierrc.json
+.vscode/settings.json
+img/pokemon-seeklogo.com.ai
+node_modules/
+.DS_Store
+
+js/fetch-polyfill.js
+js/fetch-polyfill.js
